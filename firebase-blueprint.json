@@ -1,0 +1,74 @@
+{
+  "entities": {
+    "UserProfile": {
+      "title": "Customer Cloud Profile",
+      "description": "Synced ORVA 7 customer profile and wishlist preferences linked to Google Sign-In.",
+      "type": "object",
+      "properties": {
+        "uid": {
+          "type": "string",
+          "description": "Firebase Auth user ID matching the document ID.",
+          "minLength": 1,
+          "maxLength": 128,
+          "pattern": "^[a-zA-Z0-9_-]+$"
+        },
+        "name": {
+          "type": "string",
+          "description": "Customer display name.",
+          "minLength": 1,
+          "maxLength": 120
+        },
+        "email": {
+          "type": "string",
+          "format": "email",
+          "description": "Verified customer email address.",
+          "minLength": 3,
+          "maxLength": 200
+        },
+        "photoUrl": {
+          "type": "string",
+          "description": "Optional Google profile avatar URL.",
+          "maxLength": 500
+        },
+        "phone": {
+          "type": "string",
+          "description": "Optional customer phone number.",
+          "maxLength": 40
+        },
+        "address": {
+          "type": "string",
+          "description": "Optional default shipping address.",
+          "maxLength": 300
+        },
+        "authProvider": {
+          "type": "string",
+          "enum": ["google", "password"],
+          "description": "Authentication provider used for account sync."
+        },
+        "wishlistIds": {
+          "type": "array",
+          "description": "Bounded list of up to 50 wishlisted ORVA 7 product IDs."
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Server timestamp when the synced profile was created."
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Server timestamp of the latest sync update."
+        }
+      },
+      "required": ["uid", "name", "email", "authProvider", "wishlistIds", "createdAt", "updatedAt"]
+    }
+  },
+  "firestore": {
+    "/users/{userId}": {
+      "schema": {
+        "$ref": "#/entities/UserProfile"
+      },
+      "description": "Private customer profile and wishlist sync document owned strictly by the authenticated user."
+    }
+  }
+}

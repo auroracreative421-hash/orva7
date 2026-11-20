@@ -1,0 +1,226 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ORVA 7 | دار أورفا 7 للأزياء الفاخرة</title>
+    <meta
+      name="description"
+      content="منصة تجارة إلكترونية فاخرة باللغة العربية لدار الأزياء ORVA 7 مع لوحة تحكم ديناميكية متكاملة ونظام طلب عبر واتساب."
+    />
+    <meta property="og:title" content="ORVA 7 | دار أورفا 7 للأزياء الفاخرة" />
+    <meta
+      property="og:description"
+      content="تصاميم معمارية راقية من دار ORVA 7 للأزياء الفاخرة — تسوق المجموعات الحصرية مع الطلب المباشر عبر واتساب."
+    />
+    <meta property="og:type" content="website" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/src/styles/tokens.css" />
+    <link rel="stylesheet" href="/src/styles/storefront.css" />
+  </head>
+  <body>
+    <div id="announcement-bar" class="announcement-bar" hidden>
+      <div class="container announcement-inner">
+        <span id="announcement-text"></span>
+        <button
+          id="close-announcement-btn"
+          type="button"
+          class="announcement-close"
+          aria-label="إغلاق شريط الإعلانات"
+        >
+          ✕
+        </button>
+      </div>
+    </div>
+
+    <header class="site-header">
+      <div class="container header-inner">
+        <a href="#top" class="brand-link" id="brand-logo-link" aria-label="ORVA 7 الرئيسية">
+          <span id="brand-logo-slot"></span>
+          <span id="brand-name-text" class="brand-wordmark">ORVA 7</span>
+        </a>
+
+        <nav class="main-nav" aria-label="التنقل الرئيسي">
+          <a href="#collections" class="nav-link">المجموعات</a>
+          <a href="#featured" class="nav-link">المميزة</a>
+          <a href="#catalog" class="nav-link">المتجر</a>
+          <a href="#editorial" class="nav-link">الدار</a>
+        </nav>
+
+        <div class="header-actions">
+          <button
+            type="button"
+            id="mobile-menu-toggle"
+            class="mobile-menu-btn"
+            aria-label="فتح القائمة"
+            aria-expanded="false"
+            aria-controls="mobile-nav-drawer"
+          >
+            ☰
+          </button>
+
+          <div class="account-menu-wrap" id="account-menu-wrap">
+            <button
+              type="button"
+              id="open-account-btn"
+              class="btn-account-header"
+              aria-label="قائمة حساب العميل وتسجيل الدخول"
+              aria-expanded="false"
+              aria-haspopup="menu"
+              aria-controls="account-menu-dropdown"
+            >
+              <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+                <circle cx="12" cy="8" r="4"></circle>
+                <path d="M4 20c0-4 3.6-6.5 8-6.5s8 2.5 8 6.5"></path>
+              </svg>
+              <span id="header-account-label">تسجيل الدخول</span>
+              <span class="account-caret" aria-hidden="true">▾</span>
+            </button>
+
+            <div
+              id="account-menu-dropdown"
+              class="account-menu-dropdown"
+              role="menu"
+              aria-label="قائمة حساب العميل"
+              hidden
+            ></div>
+          </div>
+
+          <button type="button" id="open-cart-btn" class="btn-cart-primary" aria-label="حقيبة التسوق">
+            <span>حقيبة التسوق</span>
+            <span id="header-cart-count" class="cart-count-num">0</span>
+          </button>
+        </div>
+      </div>
+
+      <div id="mobile-nav-drawer" class="mobile-nav-drawer" hidden>
+        <nav class="mobile-nav-links" aria-label="قائمة الجوال">
+          <a href="#collections" class="mobile-nav-link">المجموعات</a>
+          <a href="#featured" class="mobile-nav-link">المميزة</a>
+          <a href="#catalog" class="mobile-nav-link">المتجر</a>
+          <a href="#editorial" class="mobile-nav-link">الدار</a>
+          <button type="button" id="mobile-account-btn" class="mobile-nav-link mobile-nav-action">تسجيل الدخول / حسابي</button>
+          <button type="button" id="mobile-ai-btn" class="mobile-nav-link mobile-nav-action">المساعد الذكي ORVA 7</button>
+        </nav>
+      </div>
+    </header>
+
+    <main id="storefront-main" tabindex="-1">
+      <div class="loading-shell container" id="storefront-loading">
+        <div class="skeleton-hero"></div>
+        <div class="skeleton-grid">
+          <div class="skeleton-card"></div>
+          <div class="skeleton-card"></div>
+          <div class="skeleton-card"></div>
+        </div>
+      </div>
+    </main>
+
+    <!-- Dedicated Product Detail View / Modal -->
+    <dialog id="product-detail-dialog" class="pdp-dialog" aria-labelledby="pdp-title">
+      <div class="pdp-container" id="pdp-content"></div>
+    </dialog>
+
+    <!-- Customer Account & Google Sync Modal -->
+    <dialog id="account-dialog" class="pdp-dialog account-dialog" aria-labelledby="account-dialog-title">
+      <div class="pdp-container" id="account-dialog-content"></div>
+    </dialog>
+
+    <!-- Shopping Cart Slide-Over Drawer -->
+    <div id="cart-backdrop" class="drawer-backdrop" hidden></div>
+    <aside
+      id="cart-drawer"
+      class="cart-drawer"
+      aria-label="حقيبة التسوق"
+      aria-hidden="true"
+      hidden
+    >
+      <div class="cart-header">
+        <div>
+          <h2 class="cart-title">حقيبة التسوق</h2>
+          <p class="cart-subtitle" id="cart-items-summary">0 قطع مختارة</p>
+        </div>
+        <button type="button" id="close-cart-btn" class="icon-btn" aria-label="إغلاق حقيبة التسوق">
+          ✕
+        </button>
+      </div>
+
+      <div id="cart-body" class="cart-body"></div>
+      <div id="cart-footer" class="cart-footer"></div>
+    </aside>
+
+    <footer class="site-footer" id="site-footer">
+      <div class="container footer-grid" id="footer-content"></div>
+      <div class="container footer-bottom">
+        <p id="footer-copyright"></p>
+        <div class="footer-bottom-links">
+          <a href="/admin" class="footer-admin-link">بوابة الإدارة</a>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Floating AI Customer Service Assistant -->
+    <button
+      type="button"
+      id="ai-chat-fab"
+      class="ai-chat-fab"
+      aria-expanded="false"
+      aria-controls="ai-chat-window"
+      aria-label="فتح المساعد الذكي لخدمة العملاء"
+    >
+      <span class="ai-chat-fab-mark" aria-hidden="true">✦</span>
+      <span>مساعد ORVA 7 الذكي</span>
+    </button>
+
+    <section
+      id="ai-chat-window"
+      class="ai-chat-window"
+      role="dialog"
+      aria-label="المساعد الذكي لخدمة عملاء ORVA 7"
+      hidden
+    >
+      <header class="ai-chat-header">
+        <div class="ai-chat-brand">
+          <span class="ai-chat-avatar" aria-hidden="true">O7</span>
+          <div>
+            <h2 class="ai-chat-title">مستشار ORVA 7 الذكي</h2>
+            <p class="ai-chat-subtitle">خدمة العملاء الفورية والمقاسات</p>
+          </div>
+        </div>
+        <div style="display:flex;align-items:center;gap:0.4rem;">
+          <button type="button" id="ai-chat-reset" class="ai-head-btn" title="محادثة جديدة" aria-label="محادثة جديدة">↺</button>
+          <button type="button" id="ai-chat-close" class="ai-head-btn" title="إغلاق" aria-label="إغلاق المساعد الذكي">✕</button>
+        </div>
+      </header>
+
+      <div id="ai-chat-messages" class="ai-chat-messages"></div>
+
+      <div id="ai-chat-typing" class="ai-typing" hidden>
+        <span class="ai-typing-dots" aria-hidden="true"><i></i><i></i><i></i></span>
+        <span>المستشار الذكي يكتب الرد...</span>
+      </div>
+
+      <form id="ai-chat-form" class="ai-chat-form" novalidate>
+        <input
+          type="text"
+          id="ai-chat-input"
+          class="ai-chat-input"
+          placeholder="اسأل عن قطعة، مقاس، عرض أو الشحن..."
+          autocomplete="off"
+          maxlength="2000"
+        />
+        <button type="submit" id="ai-chat-send" class="btn btn-primary btn-sm">إرسال</button>
+      </form>
+    </section>
+
+    <div id="toast-region" class="toast-region" aria-live="polite"></div>
+
+    <script type="module" src="/src/js/storefront.js"></script>
+  </body>
+</html>

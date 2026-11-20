@@ -1,0 +1,6 @@
+{
+  "name": "ORVA 7 | دار أورفا 7 للأزياء الفاخرة",
+  "description": "منصة تجارة إلكترونية فاخرة باللغة العربية لدار الأزياء ORVA 7 مع لوحة تحكم ديناميكية متكاملة ونظام طلب عبر واتساب.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
